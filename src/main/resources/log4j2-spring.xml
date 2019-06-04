@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+日志级别
+trace： 是追踪，就是程序推进以下，你就可以写个trace输出，所以trace应该会特别多，不过没关系，我们可以设置最低日志级别不让他输出。
+debug： 调试么，我一般就只用这个作为最低级别，trace压根不用。是在没办法就用eclipse或者idea的debug功能就好了么。
+info： 输出一下你感兴趣的或者重要的信息，这个用的最多了。
+warn： 有些信息不是错误信息，但是也要给程序员的一些提示，类似于eclipse中代码的验证不是有error 和warn（不算错误但是也请注意，比如以下depressed的方法）。
+error： 错误信息。用的也比较多。
+fatal： 级别比较高了。重大错误，这种级别你可以直接停止程序了，是不应该出现的错误么！不用那么紧张，其实就是一个程度的问题。
+ -->
+<configuration>
+	<properties>
+		<!-- 文件输出格式 -->
+        <!-- 
+                %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间 
+                %p : 日志输出格式 
+                %c : logger的名称 
+                %m : 日志内容，即 logger.info("message") 
+                %n : 换行符 
+                %C : Java类名 
+                %L : 日志输出所在行数 
+                %M : 日志输出所在方法名 
+                hostName : 本地机器名 
+                hostAddress : 本地ip地址 -->
+		<property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} |-%-5level	[%thread] %c [%L] -| %msg%n</property>
+	</properties>
+	<!--先定义所有的appender(输出器) -->
+	<appenders>
+	    <!-- 输出到控制台 -->
+	    <!--输出日志的格式，引用自定义模板 PATTERN -->
+		<Console
+			name="CONSOLE"
+			target="system_out">
+			<PatternLayout pattern="${PATTERN}" />
+		</Console>
+	</appenders>
+
+	<loggers>
+		<logger
+			name="com.xue"
+			level="debug" />
+		<root level="info">
+			<appenderref ref="CONSOLE" />
+		</root>
+	</loggers>
+
+</configuration>
